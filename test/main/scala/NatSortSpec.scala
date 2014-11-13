@@ -32,17 +32,41 @@ class NatSortSpec extends Specification {
     "- Correct the order of a randomized list" in {
       val expected = List("2", "44", "060", "00100", "157", "001230", "5000", "6513", "10000", "123456789", "987654321")
       val randomized = Random.shuffle(expected)
-      val output = NatSort.sort(randomized)
+      val sorted = NatSort.sort(randomized)
 
-      assertSorted(expected, output.toIterable)
+      assertSorted(expected, sorted.toIterable)
     }
 
     "- Handle floating point numbers" in {
       val expected = List("2.02", "44", "060", "00100.25", "157.99", "001230", "5000", "6513.71", "6513.89", "10000", "123456789", "987654321")
       val randomized = Random.shuffle(expected)
-      val output = NatSort.sort(randomized)
+      val sorted = NatSort.sort(randomized)
 
-      assertSorted(expected, output.toIterable)
+      assertSorted(expected, sorted.toIterable)
+    }
+
+    "- Handle filenames" in {
+      val expected = List("ver-1.2.1", "ver-1.2.3", "ver-1.2.5", "ver-1.2.15", "ver-1.3.3", "ver-1.3.12")
+      val randomize = Random.shuffle(expected)
+      val sorted = NatSort.sort(randomize)
+
+      assertSorted(expected, sorted.toIterable)
+    }
+
+    "- Handle chemical elements" in {
+      val expected = List("C1H2", "C1H4", "C2H2", "C2H6", "C2N", "C3H6")
+      val randomize = Random.shuffle(expected)
+      val sorted = NatSort.sort(randomize)
+
+      assertSorted(expected, sorted.toIterable)
+    }
+
+    "- Handle team names" in {
+      val expected = List("Team 1", "Team 30", "Team 58", "Team 101")
+      val randomize = Random.shuffle(expected)
+      val sorted = NatSort.sort(randomize)
+
+      assertSorted(expected, sorted.toIterable)
     }
   }
 
