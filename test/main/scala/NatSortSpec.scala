@@ -72,6 +72,9 @@ class NatSortSpec extends Specification {
 
   private def assertSorted(expected: Iterable[String], actual: Iterable[String]) = {
     val zipped = expected.zip(actual)
+
+    zipped.map(zip => println(s"> ${zip._1} --> ${zip._2} <"))
+
     val filtered = zipped.filter(strs => strs._1 != strs._2)
     val differences = filtered.count(str => true)
 
