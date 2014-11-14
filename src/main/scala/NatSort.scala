@@ -11,7 +11,6 @@ object NatSort {
     case class WordNumber(word: String, number: List[Long])
 
     def extractNumeric(word: String): WordNumber = {
-
       val matches = numberExtraction.findAllMatchIn(word)
       val matchList = matches.toList
 
@@ -24,7 +23,7 @@ object NatSort {
       current <- input
     } yield extractNumeric(current)
 
-    val sorted = mapped.toList.sortBy { wn => wn.number.sum }
+    val sorted = mapped.toList.sortBy(wn => wn.number.reverse )
 
     val reduced = for {
       current <- sorted

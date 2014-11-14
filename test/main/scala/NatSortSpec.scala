@@ -42,7 +42,8 @@ class NatSortSpec extends Specification {
       val randomized = Random.shuffle(expected)
       val sorted = NatSort.sort(randomized)
 
-      assertSorted(expected, sorted.toIterable)
+      sorted should be(expected)
+//      assertSorted(expected, sorted.toIterable)
     }
 
     "- Handle filenames" in {
