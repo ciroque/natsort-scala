@@ -6,15 +6,6 @@ import scala.util.Random
 class NatSortSpec extends Specification {
 
   "NatSort " should {
-    "- Return correct sorting given a simple list of numbers " in {
-
-      val input = List("1000", "0200", "1", "1000000", "007")
-      val expected = List("1", "007", "0200", "1000", "1000000")
-
-      val output = NatSort.sort(input.toTraversable)
-
-      assertSorted(expected, output.toIterable)
-    }
 
     "- Blow up when an element is not Int parseable" in {
       val input = List("1000", "0200", "1", "b1000000", "007")
@@ -27,6 +18,16 @@ class NatSortSpec extends Specification {
       }
 
       result.toString must contain("b1000000")
+    }
+
+    "- Return correct sorting given a simple list of numbers " in {
+
+      val expected = List("1", "007", "0200", "1000", "1000000")
+      val randomized = Random.shuffle(expected)
+
+      val sorted = NatSort.sort(randomized)
+
+      assertSorted(expected, sorted.toIterable)
     }
 
     "- Correct the order of a randomized list" in {
@@ -42,8 +43,7 @@ class NatSortSpec extends Specification {
       val randomized = Random.shuffle(expected)
       val sorted = NatSort.sort(randomized)
 
-      sorted should be(expected)
-//      assertSorted(expected, sorted.toIterable)
+      assertSorted(expected, sorted.toIterable)
     }
 
     "- Handle filenames" in {
@@ -51,7 +51,8 @@ class NatSortSpec extends Specification {
       val randomize = Random.shuffle(expected)
       val sorted = NatSort.sort(randomize)
 
-      assertSorted(expected, sorted.toIterable)
+      sorted should be(expected)
+//      assertSorted(expected, sorted.toIterable)
     }
 
     "- Handle chemical elements" in {
